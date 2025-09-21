@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@rainbow-me/rainbowkit/styles.css";
 import "./globals.css";
-import Web3Provider from "@/components/web3/Web3Provider";
+import { EcosystemProvider } from "../hooks/useEcosystem";
+import { AppProvider } from "../components/web3/Provider";
+import { UniversalAccountProvider } from "@/hooks/useUniversalAccount";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,19 +16,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RupeeChain",
-  description: "UPI and Credit Card destroyer",
+  title: "NovaBridge",
+  description: "UPI Killer DeFi payments app",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Web3Provider >
-          {children}
-        </Web3Provider>
+        <EcosystemProvider>
+          <UniversalAccountProvider>
+            <AppProvider>
+              {children}
+            </AppProvider>
+          </UniversalAccountProvider>
+        </EcosystemProvider>
       </body>
     </html>
   );

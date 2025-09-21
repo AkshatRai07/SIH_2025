@@ -5,6 +5,7 @@ import { WagmiProvider } from "wagmi";
 import { anvil, baseSepolia, sepolia, arbitrumSepolia, optimismSepolia, polygonAmoy, opBNBTestnet, avalancheFuji, celoSepolia, flowTestnet, rootstockTestnet } from "wagmi/chains";
 import { RainbowKitProvider, getDefaultConfig, darkTheme } from "@rainbow-me/rainbowkit";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import '@rainbow-me/rainbowkit/styles.css';
 
 const config = getDefaultConfig({
   appName: "Ledger Vote",
@@ -15,7 +16,7 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-export default function Web3Provider({ children }: { children: ReactNode }) {
+export function EvmProvider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
